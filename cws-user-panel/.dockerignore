@@ -45,7 +45,6 @@ README.md
 AUTH_IMPLEMENTATION.md
 
 # Package managers
-pnpm-lock.yaml
 yarn.lock
 package-lock.json
 
