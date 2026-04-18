@@ -18,7 +18,7 @@
         "dev": "deno run --watch --allow-env --env-file=.env --allow-read --allow-write --allow-net src/index.ts"
     },
     "compilerOptions": {
-        "jsx": "precompile",
+        "jsx": "react-jsx",
         "jsxImportSource": "hono/jsx"
     }
 }
