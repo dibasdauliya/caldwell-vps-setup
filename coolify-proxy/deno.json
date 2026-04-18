@@ -1,0 +1,24 @@
+{
+    "imports": {
+        "@types/pg": "npm:@types/pg@^8.15.6",
+        "hono": "jsr:@hono/hono@^4.9.5",
+        "hono-rate-limiter": "npm:hono-rate-limiter@^0.4.2",
+        "pg": "npm:pg@^8.16.3",
+        "resend": "npm:resend@^6.4.2",
+        "zod": "jsr:@zod/zod@^4.1.5",
+        "@src/": "./src/",
+        "@coolify/": "./src/coolify/",
+        "@routes/": "./src/routes/",
+        "@middleware/": "./src/middlewares/",
+        "@utils/": "./src/utils/",
+        "@sysdb/": "./src/system_database/"
+    },
+    "tasks": {
+        "start": "deno run --allow-env --allow-read --allow-write --allow-net src/index.ts",
+        "dev": "deno run --watch --allow-env --env-file=.env --allow-read --allow-write --allow-net src/index.ts"
+    },
+    "compilerOptions": {
+        "jsx": "precompile",
+        "jsxImportSource": "hono/jsx"
+    }
+}

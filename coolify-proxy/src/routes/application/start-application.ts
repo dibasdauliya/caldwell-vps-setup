@@ -1,0 +1,42 @@
+import { Hono } from "hono";
+import { jwt } from "hono/jwt";
+import { safeAsync } from "@utils/safe-async.ts";
+import { startApplication } from "@coolify/application.ts";
+import { getEnvThrows } from "@utils/throws-env.ts";
+import { rateLimiter } from "hono-rate-limiter";
+
+const startApplicationRoute = new Hono();
+
+const JWT_SECRET = getEnvThrows("JWT_SECRET");
+
+startApplicationRoute.post(
+  "/start-application/:uuid",
+  jwt({
+    secret: JWT_SECRET,
+    cookie: "auth-token",
+  }),
+  // @ts-expect-error <>
+  rateLimiter({
+    windowMs: 60 * 1 * 1000,
+    limit: 1,
+    standardHeaders: "draft-6",
+    keyGenerator: (c) => {
+      const uuid = c.req.param("uuid");
+      // @ts-expect-error : <>
+      const payload = c.get("jwtPayload") as unknown as User;
+      return `${payload.id}${uuid}`;
+    },
+  }),
+  async (c) => {
+    const uuid = c.req.param("uuid");
+    const { data, error } = await safeAsync(() => startApplication(uuid));
+    if (error) {
+      c.status(500);
+      return c.json({ message: error.message });
+    }
+    c.status(200);
+    return c.json(data);
+  },
+);
+
+export { startApplicationRoute };
