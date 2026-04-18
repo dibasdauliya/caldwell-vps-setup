@@ -21,19 +21,9 @@ pnpm dev
 
 Make sure each folder has a `.env` file configured (you can copy from `.env.example` if needed).
 
-# coolify-test-todo-app
-
-1. When creating an app, enter a webhook secret in the "GitHub Webhook Secret" field under Advanced Settings
-2. In your GitHub repo, go to Settings > Webhooks > Add webhook
-3. Set the Payload URL to your Coolify instance's webhook endpoint (typically
-   https://<your-coolify-domain>/webhooks/github/events/manual)
-4. Set Content type to application/json
-5. Set Secret to the same secret you entered in step 1
-6. Select Just the push event
-
 ---
 
-It's simple — `cws-user-panel` only has **one env var**:
+`cws-user-panel` only has **one env var**:
 
 ```
 NEXT_PUBLIC_API_URL=https://api.yourdomain.com
