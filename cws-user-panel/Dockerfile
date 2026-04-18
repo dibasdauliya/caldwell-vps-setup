@@ -10,9 +10,9 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 
 ENV NEXT_PRIVATE_WORKER_THREADS=1
-ENV NODE_OPTIONS="--max-old-space-size=512"
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 
-RUN pnpm build
+RUN NEXT_DISABLE_TURBOPACK=1 pnpm build
 
 EXPOSE 3000
 
