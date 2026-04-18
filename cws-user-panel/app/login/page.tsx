@@ -87,7 +87,7 @@ function LoginForm() {
         <div className="flex items-center justify-center min-h-screen bg-background">
             <Card className="w-full max-w-md">
                 <CardHeader className="text-center">
-                    <CardTitle>Sign in to Coolify</CardTitle>
+                    <CardTitle>Sign in to C-STEM</CardTitle>
                     <CardDescription>
                         Enter your email to receive a magic sign-in link
                     </CardDescription>
