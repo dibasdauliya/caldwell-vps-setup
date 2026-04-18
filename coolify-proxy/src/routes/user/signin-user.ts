@@ -19,14 +19,23 @@ const ZsigninUser = z.object({
 signinUserRoute.get("/signin-user/:token", async (c) => {
   const token = c.req.param("token");
 
+  console.log("[signin-user GET] full URL:", c.req.url);
+  console.log("[signin-user GET] token param:", token);
+  console.log("[signin-user GET] token length:", token.length);
+  console.log("[signin-user GET] dot count:", token.split(".").length - 1);
+  console.log("[signin-user GET] JWT_SECRET length:", JWT_SECRET.length);
+  console.log("[signin-user GET] FRONTEND_URL:", FRONTEND_URL);
+
   const { error: jwtVerifyError } = await safeAsync(() =>
     verify(token, JWT_SECRET),
   );
 
   if (jwtVerifyError) {
+    console.log("[signin-user GET] JWT verify FAILED:", jwtVerifyError.message);
     return c.redirect(`${FRONTEND_URL}/login?error=invalid_token`);
   }
 
+  console.log("[signin-user GET] JWT verify SUCCESS, redirecting to frontend");
   return c.redirect(`${FRONTEND_URL}/api/auth/verify?token=${token}`);
 });
 
