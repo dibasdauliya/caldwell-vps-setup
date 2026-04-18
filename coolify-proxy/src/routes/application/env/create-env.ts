@@ -12,7 +12,7 @@ const JWT_SECRET = getEnvThrows("JWT_SECRET");
 
 createEnvRoute.post(
   "/create-env/:uuid",
-  jwt({
+  jwt({ alg: "HS256",
     secret: JWT_SECRET,
     cookie: "auth-token",
   }),
@@ -48,7 +48,7 @@ const ZEnvironmentVariableBulk = z.array(ZEnvironmentVariable);
 
 createEnvRoute.post(
   "/create-env-bulk/:app_uuid",
-  jwt({
+  jwt({ alg: "HS256",
     secret: JWT_SECRET,
     cookie: "auth-token",
   }),

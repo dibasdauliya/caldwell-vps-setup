@@ -12,7 +12,7 @@ const JWT_SECRET = getEnvThrows("JWT_SECRET");
 
 startDatabaseRoute.post(
   "/start-database/:uuid",
-  jwt({
+  jwt({ alg: "HS256",
     secret: JWT_SECRET,
     cookie: "auth-token",
   }),

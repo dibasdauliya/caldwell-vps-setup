@@ -11,7 +11,7 @@ const JWT_SECRET = getEnvThrows("JWT_SECRET");
 
 getProjectResourcesRoute.get(
   "/get-project-resources/:uuid",
-  jwt({
+  jwt({ alg: "HS256",
     secret: JWT_SECRET,
     cookie: "auth-token",
   }),

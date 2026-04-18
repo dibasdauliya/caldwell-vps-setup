@@ -16,7 +16,7 @@ const JWT_SECRET = getEnvThrows("JWT_SECRET");
 
 createDatabaseRoute.post(
   "/create-database-mongodb",
-  jwt({
+  jwt({ alg: "HS256",
     secret: JWT_SECRET,
     cookie: "auth-token",
   }),
@@ -50,7 +50,7 @@ createDatabaseRoute.post(
 
 createDatabaseRoute.post(
   "/create-database-postgresql",
-  jwt({
+  jwt({ alg: "HS256",
     secret: JWT_SECRET,
     cookie: "auth-token",
   }),
@@ -85,7 +85,7 @@ createDatabaseRoute.post(
 
 createDatabaseRoute.post(
   "/create-database-redis",
-  jwt({
+  jwt({ alg: "HS256",
     secret: JWT_SECRET,
     cookie: "auth-token",
   }),

@@ -10,7 +10,7 @@ const JWT_SECRET = getEnvThrows("JWT_SECRET");
 
 listEnvRoute.get(
   "/list-env/:uuid",
-  jwt({
+  jwt({ alg: "HS256",
     secret: JWT_SECRET,
     cookie: "auth-token",
   }),

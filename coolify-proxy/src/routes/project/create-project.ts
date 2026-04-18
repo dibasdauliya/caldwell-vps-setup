@@ -20,7 +20,7 @@ const JWT_SECRET = getEnvThrows("JWT_SECRET");
 
 createProjectRoute.post(
   "/create-project",
-  jwt({
+  jwt({ alg: "HS256",
     secret: JWT_SECRET,
     cookie: "auth-token",
   }),

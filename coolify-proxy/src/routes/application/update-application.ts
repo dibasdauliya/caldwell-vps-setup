@@ -12,7 +12,7 @@ const JWT_SECRET = getEnvThrows("JWT_SECRET");
 
 updateApplicationRoute.post(
   "/update-application/:app_uuid",
-  jwt({
+  jwt({ alg: "HS256",
     secret: JWT_SECRET,
     cookie: "auth-token",
   }),

@@ -10,7 +10,7 @@ const JWT_SECRET = getEnvThrows("JWT_SECRET");
 
 deleteApplicationRoute.delete(
   "/delete-application/:uuid",
-  jwt({
+  jwt({ alg: "HS256",
     secret: JWT_SECRET,
     cookie: "auth-token",
   }),
