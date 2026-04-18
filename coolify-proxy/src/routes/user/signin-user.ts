@@ -27,9 +27,7 @@ signinUserRoute.get("/signin-user/:token", async (c) => {
     return c.redirect(`${FRONTEND_URL}/login?error=invalid_token`);
   }
 
-  setCookie(c, "auth-token", token);
-
-  return c.redirect(FRONTEND_URL);
+  return c.redirect(`${FRONTEND_URL}/api/auth/verify?token=${token}`);
 });
 
 signinUserRoute.post("/signin-user", async (c) => {
