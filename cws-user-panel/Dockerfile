@@ -1,15 +1,16 @@
-FROM node:20-alpine
+FROM node:20.18.3
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./
+RUN npm install -g pnpm
 
-RUN corepack enable && corepack prepare pnpm@9 --activate
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 COPY . .
 
-ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_PRIVATE_WORKER_THREADS=1
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 
 RUN pnpm build
 
