@@ -11,5 +11,4 @@ const nextConfig = {
     cpus: 1,
   },
 };
-
 export default nextConfig;
