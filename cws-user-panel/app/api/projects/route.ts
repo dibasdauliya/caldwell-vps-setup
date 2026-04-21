@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { API_ENDPOINTS } from "@/lib/api-config"
 import { serverApiRequest } from "@/lib/server-api-config"
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const projects = await serverApiRequest(API_ENDPOINTS.projects.list)
     return NextResponse.json(projects)
