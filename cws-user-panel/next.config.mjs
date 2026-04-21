@@ -6,6 +6,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-}
+  experimental: {
+    workerThreads: false,
+    cpus: 1,
+  },
+};
 
-export default nextConfig
+export default nextConfig;
