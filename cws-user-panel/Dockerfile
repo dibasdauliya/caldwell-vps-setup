@@ -9,8 +9,7 @@ RUN pnpm install --frozen-lockfile
 
 COPY . .
 
-ENV NEXT_PRIVATE_WORKER_THREADS=1
-ENV NODE_OPTIONS="--max-old-space-size=2048"
+ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN pnpm build
 
