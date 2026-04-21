@@ -1,14 +1,10 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { API_ENDPOINTS, apiRequest } from "@/lib/api-config"
+import { API_ENDPOINTS } from "@/lib/api-config"
+import { serverApiRequest } from "@/lib/server-api-config"
 
 export async function GET(req: NextRequest) {
   try {
-    // Get the cookie header from the incoming request
-    const cookieHeader = req.headers.get('cookie') || ''
-
-    const projects = await apiRequest(API_ENDPOINTS.projects.list, {
-      cookieHeader
-    })
+    const projects = await serverApiRequest(API_ENDPOINTS.projects.list)
     return NextResponse.json(projects)
   } catch {
     return NextResponse.json({ error: "Failed to fetch projects" }, { status: 500 })
@@ -27,18 +23,13 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Get the cookie header from the incoming request
-    const cookieHeader = req.headers.get('cookie') || ''
-
-    // Forward the request to the backend API
-    const newProject = await apiRequest(API_ENDPOINTS.projects.create, {
+    const newProject = await serverApiRequest(API_ENDPOINTS.projects.create, {
       method: 'POST',
-      cookieHeader,
       body: JSON.stringify({ name: body.name })
     })
 
     return NextResponse.json(newProject, { status: 201 })
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to create project" },
       { status: 500 }

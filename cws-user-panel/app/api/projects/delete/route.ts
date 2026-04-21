@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { API_ENDPOINTS, apiRequest } from "@/lib/api-config"
+import { API_ENDPOINTS } from "@/lib/api-config"
+import { serverApiRequest } from "@/lib/server-api-config"
 
 export async function POST(req: NextRequest) {
     try {
@@ -13,13 +14,8 @@ export async function POST(req: NextRequest) {
             )
         }
 
-        // Get the cookie header from the incoming request
-        const cookieHeader = req.headers.get('cookie') || ''
-
-        // Forward the request to the backend API
-        await apiRequest(API_ENDPOINTS.projects.delete(body.id), {
+        await serverApiRequest(API_ENDPOINTS.projects.delete(body.id), {
             method: 'GET',
-            cookieHeader,
         })
 
         return NextResponse.json({ success: true }, { status: 200 })

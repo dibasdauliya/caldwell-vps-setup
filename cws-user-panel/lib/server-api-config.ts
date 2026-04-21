@@ -15,15 +15,10 @@ export async function serverApiRequest<T = unknown>(
         'Content-Type': 'application/json',
     }
 
-    // Add auth token if available
+    // Add auth token as both Authorization header and Cookie
     if (authToken) {
         defaultHeaders['Authorization'] = `Bearer ${authToken.value}`
-    }
-
-    // Include all cookies in the Cookie header for server-to-server requests
-    const cookieHeader = cookieStore.toString()
-    if (cookieHeader) {
-        defaultHeaders['Cookie'] = cookieHeader
+        defaultHeaders['Cookie'] = `auth-token=${authToken.value}`
     }
 
     const response = await fetch(url, {
