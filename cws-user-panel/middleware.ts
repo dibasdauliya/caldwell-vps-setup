@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://upload.cstem.us'
+
 // List of public routes that don't require authentication
 const publicRoutes = ['/login', '/api/auth/verify', '/signin']
 
@@ -15,15 +17,12 @@ export function middleware(request: NextRequest) {
 
     // If the route is protected and user is not authenticated, redirect to login
     if (!isPublicRoute && !authToken) {
-        const loginUrl = new URL('/login', request.url)
-        // Add the original URL as a redirect parameter
-        loginUrl.searchParams.set('redirect', pathname)
-        return NextResponse.redirect(loginUrl)
+        return NextResponse.redirect(`${BASE_URL}/login?redirect=${encodeURIComponent(pathname)}`)
     }
 
     // If user is authenticated and trying to access login, redirect to home
     if (isPublicRoute && authToken && pathname === '/login') {
-        return NextResponse.redirect(new URL('/', request.url))
+        return NextResponse.redirect(`${BASE_URL}/`)
     }
 
     return NextResponse.next()
