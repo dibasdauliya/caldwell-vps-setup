@@ -72,17 +72,16 @@ signinUserRoute.post("/signin-user", async (c) => {
     JWT_SECRET,
   );
 
-  // TODO: Re-enable email sending once DNS propagates
-  // const { error: sendEmailError } = await safeAsync(() =>
-  //   sendSigninEmail(parsed.data.email, token)
-  // );
-  // if (sendEmailError) {
-  //   c.status(500);
-  //   return c.json({ message: sendEmailError.message });
-  // }
+  const { error: sendEmailError } = await safeAsync(() =>
+    sendSigninEmail(parsed.data.email, token)
+  );
+  if (sendEmailError) {
+    c.status(500);
+    return c.json({ message: sendEmailError.message });
+  }
 
   c.status(200);
-  return c.json({ message: "Email sent.", token });
+  return c.json({ message: "Email sent." });
 });
 
 export { signinUserRoute };
