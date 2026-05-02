@@ -31,6 +31,9 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       PRIV_TOKEN: ${PRIV_TOKEN}
       FRONTEND_URL: ${FRONTEND_URL}
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
     depends_on:
       db:
         condition: service_healthy
